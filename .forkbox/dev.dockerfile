@@ -22,7 +22,7 @@ ARG BRANCH_NAME=master
 ARG REPO_URL=https://github.com/forkboxlabs/react
 
 WORKDIR /repo
-RUN git clone -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
+RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
 #RUN yarn
 
 ENV FORKBOX_COMMAND TERMINAL
