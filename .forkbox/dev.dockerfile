@@ -3,7 +3,6 @@ FROM anapsix/alpine-java:latest
 RUN apk add --no-cache nodejs
 
 RUN apk add --update wget git && \
-	mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2 && \
   mkdir -p /tmp/gotty && cd /tmp/gotty && \
 	wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && \
 	tar -zxvf gotty_linux_amd64.tar.gz && \
@@ -24,7 +23,7 @@ ARG REPO_URL=https://github.com/forkboxlabs/react
 
 WORKDIR /repo
 RUN git clone -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
-RUN yarn
+#RUN yarn
 
 ENV FORKBOX_COMMAND TERMINAL
 
