@@ -1,8 +1,6 @@
 FROM anapsix/alpine-java:latest
 
-RUN apk add --no-cache nodejs
-
-RUN apk add --update wget git && \
+RUN apk add --update wget git nodejs yarn && \
   mkdir -p /tmp/gotty && cd /tmp/gotty && \
 	wget https://github.com/yudai/gotty/releases/download/v1.0.1/gotty_linux_amd64.tar.gz && \
 	tar -zxvf gotty_linux_amd64.tar.gz && \
@@ -20,8 +18,6 @@ preferences {\n\
 EXPOSE 8080
 ARG BRANCH_NAME=master
 ARG REPO_URL=https://github.com/forkboxlabs/react
-
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
 
 WORKDIR /repo
 RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
