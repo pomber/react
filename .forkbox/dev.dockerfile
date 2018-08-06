@@ -23,7 +23,6 @@ ARG REPO_URL=https://github.com/forkboxlabs/react
 WORKDIR /repo
 RUN git clone -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
 RUN yarn
-RUN yarn build dom,core,interaction,simple-cache-provider --type=NODE
 
 ENV FORKBOX_COMMAND TERMINAL
 
@@ -34,7 +33,7 @@ echo "FORKBOX_COMMAND has the value: $FORKBOX_COMMAND" \n\
 case "$FORKBOX_COMMAND" in \n\
  TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
  TESTS) gotty --permit-write --reconnect yarn test:watch ;; \n\ 
- SUSPENSE) cd fixtures/unstable-async/suspense/ && yarn && yarn start ;; \n\ 
+ SUSPENSE) yarn build dom,core,interaction,simple-cache-provider --type=NODE && cd fixtures/unstable-async/suspense/ && yarn && yarn start ;; \n\ 
  *) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
