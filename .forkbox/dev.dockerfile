@@ -21,6 +21,8 @@ EXPOSE 8080
 ARG BRANCH_NAME=master
 ARG REPO_URL=https://github.com/forkboxlabs/react
 
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash
+
 WORKDIR /repo
 RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
 RUN yarn
