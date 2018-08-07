@@ -39,7 +39,7 @@ COPY --from=0 /repo/fixtures/unstable-async/time-slicing /repo/fixtures/unstable
 WORKDIR /repo
 
 RUN yarn --cwd fixtures/unstable-async/suspense
-RUN yarn --cwd fixtures/unstable-async/time-slicing
+#RUN yarn --cwd fixtures/unstable-async/time-slicing
 
 ENV FORKBOX_COMMAND TERMINAL
 
@@ -51,7 +51,7 @@ case "$FORKBOX_COMMAND" in \n\
 TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
 TESTS) gotty --permit-write --reconnect yarn test:watch ;; \n\ 
 SUSPENSE) cd fixtures/unstable-async/suspense/ && yarn start ;; \n\ 
-TIMESLICING) cd fixtures/unstable-async/time-slicing/ && yarn start ;; \n\ 
+TIMESLICING) cd fixtures/unstable-async/time-slicing/ && yarn && yarn start ;; \n\ 
 *) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
