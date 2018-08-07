@@ -1,7 +1,9 @@
 {
   "commands": [
     { "name": "Launch Terminal", "env": { "FORKBOX_COMMAND": "TERMINAL" } },
-    { "name": "Suspense Demo", "env": { "FORKBOX_COMMAND": "SUSPENSE" } },
-    { "name": "Time-slicing Demo", "env": { "FORKBOX_COMMAND": "TIMESLICING" } }
+    { "name": "Watch Tests", "env": { "FORKBOX_COMMAND": "TESTS" } },
+    { "name": "Run Suspense Demo", "env": { }, "dockerfile": "suspense.dockerfile" },
+    { "name": "Run Time-slicing Demo", "env": { }, "dockerfile": "timeslicing.dockerfile"  },
+    { "name": "Run Fiber Debugger", "env": { }, "dockerfile": "fiberdebugger.dockerfile"  }
   ]
 }
