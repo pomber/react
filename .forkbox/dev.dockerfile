@@ -1,15 +1,3 @@
-FROM anapsix/alpine-java:latest
-
-WORKDIR /repo
-
-ARG BRANCH_NAME=master
-ARG REPO_URL=https://github.com/forkboxlabs/react
-
-RUN apk add --update git nodejs yarn 
-RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
-RUN yarn 
-RUN yarn build dom,core,interaction,simple-cache-provider --type=NODE 
-
 FROM node:8-alpine
 
 RUN apk add --update wget git && \
@@ -19,10 +7,9 @@ RUN apk add --update wget git && \
 	tar -zxvf gotty_linux_amd64.tar.gz && \
 	mv gotty /usr/local/bin/gotty && \
 	rm -rf /tmp/gotty /var/cache/apk/*
-
+	
 RUN echo $'\
 preferences {\n\
-	audible_bell_sound = ""\n\
 	background_color = "#222"\n\
 	scrollbar_visible = false\n\
 	// [string] URL of user stylesheet to include in the terminal document.\n\
@@ -30,16 +17,12 @@ preferences {\n\
 }' > ~/.gotty
 
 EXPOSE 8080
-
-COPY --from=0 /repo/.git /repo/.git
-COPY --from=0 /repo/build/node_modules /repo/build/node_modules
-COPY --from=0 /repo/fixtures/unstable-async/suspense /repo/fixtures/unstable-async/suspense
-COPY --from=0 /repo/fixtures/unstable-async/time-slicing /repo/fixtures/unstable-async/time-slicing
+ARG BRANCH_NAME=master
+ARG REPO_URL=https://github.com/forkboxlabs/react
 
 WORKDIR /repo
-
-RUN yarn --cwd fixtures/unstable-async/suspense
-#RUN yarn --cwd fixtures/unstable-async/time-slicing
+RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
+RUN yarn 
 
 ENV FORKBOX_COMMAND TERMINAL
 
@@ -48,11 +31,9 @@ RUN echo $'\
 git pull \n\
 echo "FORKBOX_COMMAND has the value: $FORKBOX_COMMAND" \n\
 case "$FORKBOX_COMMAND" in \n\
-TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
-TESTS) gotty --permit-write --reconnect yarn test:watch ;; \n\ 
-SUSPENSE) cd fixtures/unstable-async/suspense/ && yarn start ;; \n\ 
-TIMESLICING) cd fixtures/unstable-async/time-slicing/ && yarn && yarn start ;; \n\ 
-*) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
+ TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
+ TESTS) gotty --permit-write --reconnect yarn test:watch ;; \n\ 
+ *) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
 
