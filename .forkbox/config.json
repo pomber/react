@@ -1,7 +1,6 @@
 {
   "commands": [
     { "name": "Launch Terminal", "env": { "FORKBOX_COMMAND": "TERMINAL" } },
-    { "name": "Watch Tests", "env": { "FORKBOX_COMMAND": "TESTS" } },
     { "name": "Suspense Demo", "env": { "FORKBOX_COMMAND": "SUSPENSE" } }
   ]
 }
