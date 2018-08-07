@@ -24,5 +24,6 @@ WORKDIR /repo
 
 RUN yarn --cwd fixtures/unstable-async/suspense
 
+#TODO set env REPO_URL
 
-CMD (watch -n 3 git pull &>/dev/null &) && cd fixtures/unstable-async/suspense/ && yarn start
+CMD git remote set-url origin ${REPO_URL} && (watch -n 3 git pull &>/dev/null &) && cd fixtures/unstable-async/suspense/ && yarn start
