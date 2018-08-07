@@ -2,6 +2,9 @@ FROM anapsix/alpine-java:latest
 
 WORKDIR /repo
 
+ARG BRANCH_NAME=master
+ARG REPO_URL=https://github.com/forkboxlabs/react
+
 RUN apk add --update git nodejs yarn 
 RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
 RUN yarn 
@@ -26,8 +29,6 @@ preferences {\n\
 }' > ~/.gotty
 
 EXPOSE 8080
-ARG BRANCH_NAME=master
-ARG REPO_URL=https://github.com/forkboxlabs/react
 
 COPY --from=0 /repo/build/node_modules /repo/build/node_modules
 COPY --from=0 /repo/fixtures/unstable-async/suspense /repo/fixtures/unstable-async/suspense
