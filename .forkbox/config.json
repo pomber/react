@@ -1,6 +1,7 @@
 {
   "commands": [
     { "name": "Launch Terminal", "env": { "FORKBOX_COMMAND": "TERMINAL" } },
-    { "name": "Suspense Demo", "env": { "FORKBOX_COMMAND": "SUSPENSE" } }
+    { "name": "Suspense Demo", "env": { "FORKBOX_COMMAND": "SUSPENSE" } },
+    { "name": "Time-slicing Demo", "env": { "FORKBOX_COMMAND": "TIMESLICING" } }
   ]
 }
