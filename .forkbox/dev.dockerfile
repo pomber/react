@@ -22,6 +22,7 @@ RUN apk add --update wget git && \
 
 RUN echo $'\
 preferences {\n\
+	audible_bell_sound = ""\n\
 	background_color = "#222"\n\
 	scrollbar_visible = false\n\
 	// [string] URL of user stylesheet to include in the terminal document.\n\
@@ -30,6 +31,7 @@ preferences {\n\
 
 EXPOSE 8080
 
+COPY --from=0 /repo/.git /repo/.git
 COPY --from=0 /repo/build/node_modules /repo/build/node_modules
 COPY --from=0 /repo/fixtures/unstable-async/suspense /repo/fixtures/unstable-async/suspense
 
