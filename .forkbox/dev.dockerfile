@@ -38,4 +38,8 @@ case "$FORKBOX_COMMAND" in \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
 
-CMD git remote set-url origin $FORKBOX_REPO_URL && (watch -n 3 git pull &>/dev/null &) && ~/start.sh
+CMD git remote set-url origin $FORKBOX_REPO_URL && \
+    git config remote.origin.fetch +refs/heads/$FORKBOX_BRANCH_NAME:refs/remotes/origin/$FORKBOX_BRANCH_NAME && \
+    git checkout $FORKBOX_BRANCH_NAME && \
+    (watch -n 3 git pull &>/dev/null &) && \
+     ~/start.sh
