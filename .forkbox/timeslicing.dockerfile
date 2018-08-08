@@ -32,4 +32,5 @@ CMD git remote set-url origin $FORKBOX_REPO_URL && \
     git fetch origin $FORKBOX_BRANCH_NAME && \
     git checkout $FORKBOX_BRANCH_NAME && \
     (watch -n 3 git pull &>/dev/null &) && \
+    cd fixtures/unstable-async/time-slicing && \
     yarn start
