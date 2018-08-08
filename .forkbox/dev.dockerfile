@@ -33,7 +33,7 @@ RUN echo $'\
 echo "FORKBOX_COMMAND has the value: $FORKBOX_COMMAND" \n\
 case "$FORKBOX_COMMAND" in \n\
  TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
- TESTS) gotty --permit-write --reconnect (yarn && yarn test:watch) ;; \n\ 
+ TESTS) gotty --permit-write --reconnect yarn && yarn test:watch ;; \n\ 
  *) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
