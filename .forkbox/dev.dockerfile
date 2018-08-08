@@ -25,10 +25,11 @@ RUN git clone --depth 1 -b ${BRANCH_NAME} --single-branch ${REPO_URL} .
 RUN yarn 
 
 ENV FORKBOX_COMMAND TERMINAL
+ENV FORKBOX_BRANCH_NAME ${BRANCH_NAME}
+ENV FORKBOX_REPO_URL ${REPO_URL}
 
 RUN echo $'\
 #!/bin/bash \n\
-git pull \n\
 echo "FORKBOX_COMMAND has the value: $FORKBOX_COMMAND" \n\
 case "$FORKBOX_COMMAND" in \n\
  TERMINAL) gotty --permit-write --reconnect --title-format "ForkBox Terminal" /bin/sh ;; \n\
@@ -37,4 +38,4 @@ case "$FORKBOX_COMMAND" in \n\
 esac \n\
 ' > ~/start.sh && chmod +x ~/start.sh
 
-CMD (watch -n 3 git pull &>/dev/null &) && ~/start.sh
+CMD git remote set-url origin $FORKBOX_REPO_URL && (watch -n 3 git pull &>/dev/null &) && ~/start.sh

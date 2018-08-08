@@ -24,6 +24,7 @@ WORKDIR /repo
 
 RUN yarn --cwd fixtures/unstable-async/suspense
 
-#TODO set env REPO_URL
+ENV FORKBOX_BRANCH_NAME ${BRANCH_NAME}
+ENV FORKBOX_REPO_URL ${REPO_URL}
 
-CMD git remote set-url origin ${REPO_URL} && (watch -n 3 git pull &>/dev/null &) && cd fixtures/unstable-async/suspense/ && yarn start
+CMD git remote set-url origin ${FORKBOX_REPO_URL} && (watch -n 3 git pull &>/dev/null &) && cd fixtures/unstable-async/suspense/ && yarn start
