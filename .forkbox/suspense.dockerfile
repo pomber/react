@@ -29,6 +29,7 @@ ENV FORKBOX_REPO_URL ${REPO_URL}
 
 CMD git remote set-url origin $FORKBOX_REPO_URL && \
     git config remote.origin.fetch +refs/heads/$FORKBOX_BRANCH_NAME:refs/remotes/origin/$FORKBOX_BRANCH_NAME && \
+    git fetch origin $FORKBOX_BRANCH_NAME && \
     git checkout $FORKBOX_BRANCH_NAME && \
     (watch -n 3 git pull &>/dev/null &) && \
     yarn start
