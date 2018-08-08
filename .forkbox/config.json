@@ -1,8 +1,8 @@
 {
   "commands": [
-    { "name": "Launch Terminal", "env": { "FORKBOX_COMMAND": "TERMINAL" } },
-    { "name": "Watch Tests", "env": { "FORKBOX_COMMAND": "TESTS" } },
-    { "name": "Run Suspense Demo", "env": { }, "dockerfile": "suspense.dockerfile" },
-    { "name": "Run Time-slicing Demo", "env": { }, "dockerfile": "timeslicing.dockerfile"  }
+    { "name": "Launch Terminal", "dockerhub": "forkboxlabs/react.dev", "env": { "FORKBOX_COMMAND": "TERMINAL" } },
+    { "name": "Watch Tests", "dockerhub": "forkboxlabs/react.dev", "env": { "FORKBOX_COMMAND": "TESTS" } },
+    { "name": "Run Suspense Demo", "dockerhub": "forkboxlabs/react.suspense" },
+    { "name": "Run Time-slicing Demo", "dockerhub": "forkboxlabs/react.timeslicing"  }
   ]
 }
